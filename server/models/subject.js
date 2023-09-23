@@ -14,4 +14,6 @@ const subjectSchema = mongoose.Schema({
     // dateHeure: DateTime
 },{timestamps: true})
 
-const Suject = mongoose.model('Subject', subjectSchema)
+const Subject = mongoose.model('Subject', subjectSchema)
+
+export default Subject
