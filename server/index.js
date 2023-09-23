@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import subjectRoutes from './routes/subject.js'
 
 dotenv.config()
 const app = express()
@@ -15,6 +16,7 @@ mongoose.connect(MONGODB_URI,{
 }).then(result => console.log("database connected"))
 .catch((error) => console.log(error.message))
 
+app.use('/subject', subjectRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)

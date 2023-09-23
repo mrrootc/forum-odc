@@ -1,4 +1,4 @@
-import Subject from "../models/subject";
+import Subject from "../models/subject.js";
 
 export const createSubject = async (req, res) => {
     const {title, description, auteur} = req.body
