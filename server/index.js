@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import subjectRoutes from './routes/subject.js'
+import messageRoutes from './routes/message.js'
 
 dotenv.config()
 const app = express()
@@ -17,6 +18,7 @@ mongoose.connect(MONGODB_URI,{
 .catch((error) => console.log(error.message))
 
 app.use('/subject', subjectRoutes)
+app.use('/message', messageRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
