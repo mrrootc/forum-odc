@@ -10,9 +10,9 @@ const messageSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    sujectId: {
+    category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Subject"
+        ref: "Category"
     }
 },{timestamps: true})
 

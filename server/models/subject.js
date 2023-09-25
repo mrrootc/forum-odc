@@ -15,7 +15,6 @@ const subjectSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }
-    // dateHeure: DateTime
 },{timestamps: true})
 
 const Subject = mongoose.model('Subject', subjectSchema)
