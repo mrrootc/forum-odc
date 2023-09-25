@@ -1,11 +1,12 @@
 import Subject from "../models/subject.js";
 
 export const createSubject = async (req, res) => {
-    const {title, description, auteur} = req.body
+    const {title, picture, description, auteur} = req.body
 
     try{
         const newSubject = new Subject({
             title,
+            picture,
             description,
             auteur
         })

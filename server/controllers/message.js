@@ -10,9 +10,7 @@ export const createMessage = async (req, res) => {
     try{
         const newMessage = new Message(messageN)
         const message = await newMessage.save()
-        res.status(201).json({
-            message
-        })
+        res.status(201).json(message)
     }catch(error){
         res.status(500).json({message: error.message})
     }

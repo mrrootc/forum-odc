@@ -6,6 +6,10 @@ const subjectSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    picture: {
+        type: String,
+        required: true,
+    },
     description: String,
     auteur:{
         type: mongoose.Schema.Types.ObjectId,
