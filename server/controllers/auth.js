@@ -3,6 +3,13 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import sendMail from "../utils/sendMail.js";
 
+/**
+ * Registers a new user with the provided information.
+ * @param {Object} req - The request object containing the user data.
+ * @param {Object} res - The response object to send the result of the registration process.
+ * @returns None
+ * @throws {Error} If there is an error during the registration process.
+ */
 export const register = async (req, res) => {
   const { firstName, lastName, phone, email, password } = req.body;
   const salt = await bcrypt.genSalt(10);
@@ -30,6 +37,18 @@ export const register = async (req, res) => {
   }
 };
 
+/**
+ * Validates the email and verification code provided in the request body.
+ * If the email and code match a user in the database, the user's "verified" field
+ * is set to true and the response status is set to 200 with a success message.
+ * If the email and code do not match a user in the database, the response status
+ * is set to 400 with an error message.
+ * If an error occurs during the validation process, the response status is set to
+ * 500 with an error message.
+ * @param {Object} req - The request object containing the email and code.
+ * @param {Object} res - The response object to send the result.
+ * @returns None
+ */
 export const validation = async (req, res) => {
   const { email, code } = req.body;
 
@@ -49,6 +68,14 @@ export const validation = async (req, res) => {
   }
 };
 
+/**
+ * Handles the login functionality by checking the provided email and password against
+ * the user database. If the credentials are valid and the user is verified, a JWT token
+ * is generated and returned along with the user information.
+ * @param {Object} req - The request object containing the email and password.
+ * @param {Object} res - The response object to send the result.
+ * @returns None
+ */
 export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -75,15 +102,28 @@ export const login = async (req, res) => {
   }
 };
 
+/**
+ * Retrieves all users from the database and sends a JSON response with and user data.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns None
+ * @throws {Error} If there is an error retrieving the users from the database.
+ */
 export const getAllUsers = async (req, res) => {
   try {
     const user = await User.find();
-    res.status(200).json({ counts: user.lentgh, users: user });
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+/**
+ * Updates a user's phone and email information in the database.
+ * @param {Object} req - The request object containing the user's ID in the params and the updated phone and email in the body.
+ * @param {Object} res - The response object to send the updated user information or an error message.
+ * @returns None
+ */
 export const updateUser = async (req, res) => {
   const { id } = req.params;
   const { phone, email } = req.body;
@@ -100,6 +140,13 @@ export const updateUser = async (req, res) => {
   }
 };
 
+/**
+ * Deletes a user from the database.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns None
+ * @throws {Error} If there is an error deleting the user.
+ */
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {

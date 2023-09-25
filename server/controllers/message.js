@@ -1,5 +1,11 @@
 import Message from "../models/message.js";
 
+/**
+ * Creates a new message and saves it to the database.
+ * @param {Object} req - The request object containing the message data in the body.
+ * @param {Object} res - The response object to send the result back to the client.
+ * @returns None
+ */
 export const createMessage = async (req, res) => {
     const {content, auteur, subject } = req.body
     const messageN = {
@@ -16,6 +22,13 @@ export const createMessage = async (req, res) => {
     }
 }
 
+/**
+ * Retrieves all messages from the database and sends them as a JSON response.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns None
+ * @throws {Error} If there is an error retrieving the messages from the database.
+ */
 export const readAllMessage = async (req, res) => {
     try{
         const message = await Message.find()
@@ -25,6 +38,13 @@ export const readAllMessage = async (req, res) => {
     }
 }
 
+/**
+ * Retrieves a message by its ID and sends it as a JSON response.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns None
+ * @throws {Error} If there is an error retrieving the message or sending the response.
+ */
 export const readMessageById = async (req, res) => {
     const { id } = req.params
     try{
@@ -35,6 +55,13 @@ export const readMessageById = async (req, res) => {
     }
 }
 
+/**
+ * Updates a message with the specified ID and content.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns None
+ * @throws {Error} If there is an error updating the message.
+ */
 export const updateMessage = async (req, res) => {
     const { id } = req.params
     const { content } = req.body
@@ -46,6 +73,13 @@ export const updateMessage = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a message with the specified ID from the database.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns None
+ * @throws {Error} If there is an error deleting the message.
+ */
 export const deleteMessage = async (req, res) => {
     const { id } = req.params
     try{
