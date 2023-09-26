@@ -4,7 +4,6 @@ import Category from "../models/category.js";
  * Creates a new category with the provided title, picture, and subject.
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
- * @returns None
  * @throws {Error} If there is an error saving the new category.
  */
 export const createCategory = async (req, res) => {
@@ -20,11 +19,29 @@ export const createCategory = async (req, res) => {
     }
 }
 
+export const getAllCategories = async (req, res) => {
+    try{
+        const categories = await Category.find()
+        res.status(200).json(categories)
+    }catch(error){
+        res.status(500).json({message: error.message})
+    }
+}
+
+export const getCategoryById = async (req, res) => {
+    const { id } = req.params
+    try {
+        const category = await Category.findById(id)
+        res.json(category)
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+
 /**
  * Deletes a category from the database.
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
- * @returns None
  * @throws {Error} If there is an error deleting the category.
  */
 export const deleteCategory = async (req, res) => {

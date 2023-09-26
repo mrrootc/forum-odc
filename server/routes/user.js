@@ -3,11 +3,11 @@ import { deleteUser, getAllUsers, login, register, updateUser, validation } from
 import protect from '../middlewares/protect.js'
 const router = express.Router()
 
-router.post('/signin', login)
-router.post('/signup', register)
-router.get('/',protect, getAllUsers)
-router.put('/:id',protect, updateUser)
-router.delete('/:id',protect, deleteUser)
-router.post('/validation',protect, validation)
+router.post('/signin', login);
+router.post('/signup', register);
+router.get('/',protect, getAllUsers);
+router.put('/:id',protect, updateUser);
+router.delete('/:id',protect, deleteUser);
+router.post('/validation',protect, validation);
 
-export default router
+export default router;

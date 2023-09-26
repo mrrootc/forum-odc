@@ -2,9 +2,9 @@ import express from 'express';
 import { createSubject, deleteSuject } from '../controllers/subject.js';
 import protect from '../middlewares/protect.js';
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/',protect, createSubject)
-router.delete('/:id',protect, deleteSuject)
+router.post('/',protect, createSubject);
+router.delete('/:id',protect, deleteSuject);
 
-export default router
+export default router;
