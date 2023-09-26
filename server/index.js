@@ -17,9 +17,9 @@ mongoose.connect(MONGODB_URI,{
 }).then(result => console.log("database connected"))
 .catch((error) => console.log(error.message))
 
-app.use('/auth', authRoutes)
-app.use('/subject', subjectRoutes)
-app.use('/message', messageRoutes)
+app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/subject', subjectRoutes)
+app.use('/api/v1/message', messageRoutes)
 
 
 app.listen(PORT, () => {
