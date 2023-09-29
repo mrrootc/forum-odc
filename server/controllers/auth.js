@@ -31,9 +31,9 @@ export const register = async (req, res) => {
       "Confirmation de votre adresse email",
       `Votre code de confirmation est :<mark>${code}</mark> `
     );
-    res.status(201).json("Veuillez vérifier votre boîte de réception pour le code de confirmation.");
+    res.status(201).json(user.email);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json(error.message);
   }
 };
 
@@ -50,17 +50,18 @@ export const register = async (req, res) => {
  * @returns None
  */
 export const validation = async (req, res) => {
-  const { email, code } = req.body;
+  const {  code } = req.body;
 
   try {
-    const user = await User.findOne({ email, verifCode: code });
-
-    if (user) {
+    const user = await User.findOne({ verifCode: code });
+    console.log(user)
+    if (!user) {
+      res.status(400).json({message:"Code de confirmation invalide."});
+    } else {
       user.verified = true;
       await user.save();
       res.status(200).send("Email vérifié avec succès.");
-    } else {
-      res.status(400).send("Code de confirmation invalide.");
+      
     }
   } catch (error) {
     console.error(error);
@@ -81,14 +82,14 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      res.json("invalid credentials");
+      res.status(400).json("Email ou mot de passe incorrecte");
     } else {
      if(user.verified != true){
-      res.json("Veuillez validez votre compte à l'aide de code de confirmation")
+      res.status(400).json("Veuillez validez votre compte à l'aide de code de confirmation")
      }else{
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        res.json("invalide credentials");
+        res.status(4000).json("iEmail ou mot de passe incorrecte");
       } else {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
           expiresIn: "1d",

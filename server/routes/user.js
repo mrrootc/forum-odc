@@ -8,6 +8,6 @@ router.post('/signup', register);
 router.get('/',protect, getAllUsers);
 router.put('/:id',protect, updateUser);
 router.delete('/:id',protect, deleteUser);
-router.post('/validation',protect, validation);
+router.post('/validation', validation);
 
 export default router;
