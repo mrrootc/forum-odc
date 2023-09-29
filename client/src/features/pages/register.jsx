@@ -16,11 +16,11 @@ const schema = yup.object().shape({
 });
 
 export default function Register() {
-    // const history = useHistory();
+    
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
-    // const navigate = useNavigate();
+
     const [resgistration, { isLoading, isSuccess, isError, error, data }] = useRegisterMutation();
 
     useEffect(() => {

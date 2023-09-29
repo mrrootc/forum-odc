@@ -5,8 +5,8 @@ import protect from '../middlewares/protect.js';
 const router = express.Router();
 
 router.post('/',protect, createMessage);
-router.get('/',protect, readAllMessage);
-router.get('/:id',protect, readMessageById);
+router.get('/', readAllMessage);
+router.get('/:id', readMessageById);
 router.put('/id',protect, updateMessage);
 router.delete('/:id',protect, deleteMessage);
 

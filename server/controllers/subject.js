@@ -43,3 +43,12 @@ export const deleteSuject = async (req, res) => {
         res.status(500).json({message:error.message})
     }
 }
+
+export const getAllSubjects = async (req, res) => {
+    try {
+        const subject = await Subject.find()
+        res.status(200).json(subject)
+    }catch(error){
+        res.status(500).json({message:error.message})
+    }
+}
