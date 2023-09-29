@@ -9,7 +9,7 @@ export default function Validation() {
 
   const location = useLocation();
   const [code, setCode] = useState("");
-  const [validate, isLoading, isSuccess, isError, error] = useValidateMutation();
+  const [validate, isSuccess, isError, error] = useValidateMutation();
   const navigate = useNavigate();
 
   useEffect(() => {

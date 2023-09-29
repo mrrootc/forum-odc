@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import subjectRoutes from './routes/subject.js';
 import messageRoutes from './routes/message.js';
 import authRoutes from './routes/user.js';
+import categoriesRoutes from './routes/category.js'
 import cors from "cors"
 dotenv.config()
 const app = express()
@@ -25,6 +26,7 @@ mongoose.connect(MONGODB_URI,{
 app.use('/auth', authRoutes)
 app.use('/subject', subjectRoutes)
 app.use('/message', messageRoutes)
+app.use('/category', categoriesRoutes)
 
 
 app.listen(PORT, () => {

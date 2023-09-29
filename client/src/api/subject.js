@@ -3,12 +3,18 @@ import { api } from "./api";
 const subjectApi = api.injectEndpoints({
     endpoints: (builder) => ({
         subject: builder.query({
-            query: () => "/subject"
+            query: () => "/subject",
+            providesTags: ["subject"]
         }),
         createSubject: builder.mutation({
-            query: () =>
+            query: (body) => ({
+                url: "/subject",
+                method: "POST",
+                body
+            }),
+            invalidatesTags: ["subject"]
         })
     }),
 })
 
- export const { useSubjectQuery } = subjectApi
+ export const { useSubjectQuery, useCreateSubjectMutation } = subjectApi

@@ -8,7 +8,6 @@ const subjectSchema = mongoose.Schema({
     },
     picture: {
         type: String,
-        required: true,
     },
     description: String,
     auteur:{

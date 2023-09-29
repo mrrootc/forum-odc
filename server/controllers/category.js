@@ -13,7 +13,7 @@ export const createCategory = async (req, res) => {
             title, picture, subject
         })
         const category = newCategory.save()
-        res.json(category)
+        res.status(201).json(category)
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -32,7 +32,7 @@ export const getCategoryById = async (req, res) => {
     const { id } = req.params
     try {
         const category = await Category.findById(id)
-        res.json(category)
+        res.status(200).json(category)
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -51,5 +51,16 @@ export const deleteCategory = async (req, res) => {
         res.json("Categorie supprimé avec succès")
     } catch (error) {
         res.status(500).json({message: error.message})
+    }
+}
+
+export const getCategoryBySubjectId = async (req, res) =>{
+    const { id } = req.params
+    try{
+        const categories = await Category.find({ subject: id})
+        res.status(200).json(categories)
+    }
+    catch(error){
+         res.status(500).json({message: error.message})
     }
 }

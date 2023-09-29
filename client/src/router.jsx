@@ -5,15 +5,17 @@ import Login from './features/pages/login'
 import Register from './features/pages/register'
 import Validation from './features/pages/validation'
 import Home from './features/pages/home'
-import Content from './components/Content'
+import CategoryPage from './features/pages/category'
+import Message from './features/pages/message'
+// import Content from './components/category'
 
-export const router = createBrowserRouter ([
+export const router = createBrowserRouter([
     {
         path: "/",
         element: <Login />
     },
     {
-        path: "/register", 
+        path: "/register",
         element: <Register />
     },
     {
@@ -22,10 +24,21 @@ export const router = createBrowserRouter ([
     },
     {
         path: "/home",
-        element: <Home />
+        element: <Home />,
+        children: [
+            {
+                path: ":id",
+                element: <CategoryPage />,
+                children:[
+                    {
+                        path:":idcat",
+                        element: <Message />
+                    }
+                ]
+             
+            },
+          
+        ]
     },
-    {
-        path: "/test",
-        element: <Content />
-    }
+ 
 ])
