@@ -20,9 +20,8 @@ export const authApi = api.injectEndpoints({
         validate: builder.mutation({
             query: (body) => ({
                 url: "auth/validation",
-                method: "POST",
+                method: "PATCH",
                 body,
-                mode: 'no-cors'
             }),
           }),
     })

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useCreateSubjectMutation } from "../api/subject";
 
 export default function Modal() {
@@ -22,7 +22,7 @@ export default function Modal() {
   return (
     <>
       <button
-        className="px-3 py-2 font-serif text-white bg-blue-500 rounded-full ml-9"
+        className="px-3 py-2 font-serif text-blue-500 rounded-full shadow-sm ml-9"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -34,7 +34,7 @@ export default function Modal() {
           <div className="absolute inset-0 bg-gray-800 opacity-75" onClick={() => setShowModal(false)}></div>
           <div className="z-50 w-full max-w-md p-6 bg-white rounded-md shadow-md">
             <div className="flex items-start justify-between mb-4">
-              <h3 className="text-2xl font-semibold">Création d'un sujet</h3>
+              <h3 className="text-2xl font-semibold">Création dun sujet</h3>
               <button className="text-black bg-transparent border-0" onClick={() => setShowModal(false)}>
                 <span className="block w-6 h-6 py-0 text-xl text-black bg-gray-400 rounded-full opacity-7">
                   x

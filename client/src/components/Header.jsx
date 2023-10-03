@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
 
-    <header className="bg-white shadow">
+    <header className="bg-white shadow ">
       <div className="container flex items-center justify-between px-4 py-4 mx-auto border-r-2 border-slate-500">
         <div className="logo">
           <img className='h-10 w-50 ' src={logo} alt="Logo" />

@@ -3,12 +3,12 @@ import { api } from "./api";
 const messageApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getMessage: builder.query({
-            query: () => "/message",
+            query: (id) => `/message/${id}`,
             providesTags: ["messages"]
         }),
         createMessage: builder.mutation({
             query: (body) => ({
-                url: "/message",
+                url: "/message/create",
                 method: "POST",
                 body
             }),

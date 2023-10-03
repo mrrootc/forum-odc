@@ -1,11 +1,18 @@
 import { useState } from "react";
 import Question from "../../components/Question";
-import { useCreateMessageMutation } from "../../api/message";
+import { useCreateMessageMutation, useGetMessageQuery } from "../../api/message";
+import { useParams } from "react-router-dom";
 
 export default function Message() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [question, setQuestion] = useState("");
   const [createMessage, { isLoading, isError, error }] = useCreateMessageMutation();
+  const { idcat } = useParams();
+  const token = JSON.parse(localStorage.getItem('token'));
+  const userId = token?.user._id;
+
+  // Fetch messages using the useGetMessageQuery hook
+  const { data: messages, isLoading: isLoadingMessages, isError: isErrorMessages, isSuccess } = useGetMessageQuery(idcat);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -21,26 +28,22 @@ export default function Message() {
 
   const handleCreateQuestion = async () => {
     try {
-      const response = await createMessage({ body: { content: question } });
-
-     
-      console.log("Nouvelle question créée :", response);
-
-      // Fermez le modal après la création de la question
+      // Create a new message
+      createMessage({ content: question, auteur: userId, category: idcat });
       setIsModalOpen(false);
-
-      // Réinitialisez le champ de la question
       setQuestion("");
     } catch (error) {
-      // Handle the error, if needed
       console.error("Erreur lors de la création de la question :", error);
     }
   };
-
+  console.log(messages)
+  console.log(idcat)
+  if (isSuccess && messages?.category) {
+    console.log("existe")
+  } else { console.log("no existe") }
   return (
     <div className="flex flex-col">
       <div className="my-2">
-        {/* Bouton pour ouvrir le modal */}
         <button
           onClick={openModal}
           className="px-3 py-2 font-serif text-white bg-blue-500 rounded-md ml-9"
@@ -49,7 +52,15 @@ export default function Message() {
         </button>
       </div>
 
-      <Question name="C'est quoi HTML" />
+      {/* Display messages */}
+      {isLoadingMessages ? (
+        <p>Loading messages...</p>
+      ) : isErrorMessages ? (
+        <p>Error loading messages</p>
+      ) : (
+        messages  &&
+          messages.map((message) => <Question key={message.id} name={message.content} />)
+      )}
 
       {/* Le modal */}
       {isModalOpen && (

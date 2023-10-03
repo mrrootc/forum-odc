@@ -21,7 +21,6 @@ export default function CategoryPage() {
     };
 
     const handleFormSubmit = () => {
-        
         create(formData)
         console.log(formData)
         setIsModalOpen(false);
@@ -30,6 +29,8 @@ export default function CategoryPage() {
     if (isLoading) {
         return <h1>Loading ...</h1>;
     }
+    console.log('id subject :', id)
+    console.log("id category: ", idcat)
 
     return (
         <div className="ml-60">
@@ -55,8 +56,6 @@ export default function CategoryPage() {
                             'Aucune catégorie pour ce sujet'
                         )}
                     </div>
-
-                    {/* Le modal */}
                     {isModalOpen && (
                         <div className="fixed inset-0 z-10 overflow-y-auto">
                             <div className="flex items-center justify-center min-h-screen">

@@ -50,19 +50,24 @@ export const register = async (req, res) => {
  * @returns None
  */
 export const validation = async (req, res) => {
-  const {  code } = req.body;
+  const { verifCode } = req.body;
 
   try {
-    const user = await User.findOne({ verifCode: code });
-    console.log(user)
+    const user = await User.findOne({ verifCode });
+
     if (!user) {
-      res.status(400).json({message:"Code de confirmation invalide."});
+      res.status(400).json({ message: "Code de confirmation invalide." });
     } else {
-      user.verified = true;
-      await user.save();
-      res.status(200).send("Email vérifié avec succès.");
-      
+      try {
+        console.log(user)
+        await User.findByIdAndUpdate({ _id: user._id },  { verified: true } , {new: true});
+        res.status(200).json("Email vérifié avec succès.");
+      } catch (error) {
+        console.error(error);
+        res.status(500).send("Erreur lors de la validation.");
+      }
     }
+    
   } catch (error) {
     console.error(error);
     res.status(500).send("Erreur lors de la validation.");

@@ -19,11 +19,11 @@ export const router = createBrowserRouter([
         element: <Register />
     },
     {
-        path: "/validate",
+        path: "/validate/:email",
         element: <Validation />
     },
     {
-        path: "/home",
+        path: "/home/",
         element: <Home />,
         children: [
             {

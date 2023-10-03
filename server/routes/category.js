@@ -9,5 +9,6 @@ router.post('/', protect, createCategory);
 router.get('/:id', protect, getCategoryById);
 router.get('/subject/:id',protect, getCategoryBySubjectId);
 router.delete('/:id',protect, deleteCategory);
+router.get('/', protect, getAllCategories)
 
 export default router;

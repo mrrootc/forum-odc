@@ -4,9 +4,9 @@ import { Outlet } from "react-router-dom";
 export default function Home() {
   return (
     <div className="App">
-    <Header />
-    <div className="flex">
-      <SideBar />
+      <Header />
+      <div className="flex">
+        <SideBar />
       <div className="px-10 py-4">
         <Outlet />
       </div>
